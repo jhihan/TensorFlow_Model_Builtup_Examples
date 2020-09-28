@@ -38,9 +38,9 @@ class Model_sub(tf.keras.models.Model):
             return tf.keras.models.Model(inputs=[x], outputs=self.call(x)).summary() 
 ```
 We can build up a neural network template by inheriting the tf.keras.models.Model and overriding two (or more) functions. 
-#### Overriding """__init__"""
-The first function is the constructor """__init__""", in which all the layers can be set up. 
-#### Overriding """call"""
-The second function is """call""", in which the feedforward in the neural network is executed. That means the data will flow from the first layer to other layers and finally out of the outlayer to complete a neural network operation. Some layers, in particular the BatchNormalization layer and the Dropout layer, have different behaviors during training and inference. For such layers, it is standard practice to expose a training (boolean) argument in the call() method.
+#### Overriding ```__init__```
+The first function is the constructor ```__init__```, in which all the layers can be set up. 
+#### Overriding ```call```
+The second function is ```call```, in which the feedforward in the neural network is executed. That means the data will flow from the first layer to other layers and finally out of the outlayer to complete a neural network operation. Some layers, in particular the BatchNormalization layer and the Dropout layer, have different behaviors during training and inference. For such layers, it is standard practice to expose a training (boolean) argument in the call() method.
 #### Overriding or defining other functions if needed
 Here the third function "summary" normally is not necessary. If we want to print out the model summary before the compile process, the model must be build up first. There are several way to achieve this purpose and overriding the summary function as above is one of the way. If you are interested in the model summary in the model subclassing method, please check the discussion in this post: https://stackoverflow.com/questions/55235212/model-summary-cant-print-output-shape-while-using-subclass-model.
