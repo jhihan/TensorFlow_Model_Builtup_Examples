@@ -7,6 +7,9 @@ https://raw.githubusercontent.com/jhihan/TensorFlow_Model_Builtup_Examples/maste
 The GloVe (Global Vectors for Word Representation)  
 http://nlp.stanford.edu/data/glove.6B.zip  
 ## Model
+```
+import tensorflow as tf
+```
 ### Sequential API
 ```
 model1 = tf.keras.Sequential([
