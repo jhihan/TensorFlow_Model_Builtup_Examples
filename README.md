@@ -2,13 +2,32 @@
 In this project, I present the three ways to build up the model in TensorFlow.keras: Sequential, functional, and model subclassing.
 Here I will solve a BBC news document classification problem with the data set using bidirectional LSTM model as an example.
 ## Dataset
-The BBC news classification 
-https://raw.githubusercontent.com/jhihan/TensorFlow_Model_Builtup_Examples/master/bbc-text.csv
-The GloVe (Global Vectors for Word Representation)
-http://nlp.stanford.edu/data/glove.6B.zip
+The BBC news classification:  
+https://raw.githubusercontent.com/jhihan/TensorFlow_Model_Builtup_Examples/master/bbc-text.csv  
+The GloVe (Global Vectors for Word Representation)  
+http://nlp.stanford.edu/data/glove.6B.zip  
 ## Model
 ### Sequential API
+```
+model1 = tf.keras.Sequential([
+            tf.keras.layers.Embedding(input_dim=5000, output_dim=100,input_length=200),
+            tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(100)),
+            tf.keras.layers.Dense(256, activation='relu'),
+            tf.keras.layers.Dropout(0.5),
+            tf.keras.layers.Dense(256, activation='relu')
+            tf.keras.layers.Dense(5, activation='softmax')
+        ])
+```
 ### Functional API
+In the functional API, models can be created with non-linear topology and are not obliged to follow a straight line like in the sequential model.
+```
+inputs = tf.keras.Input(shape=(200,))
+embedding = tf.keras.layers.Embedding(input_dim=5000, output_dim=100,input_length=200)(inputs)
+bi_lstm = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(embedding_dim))(embedding)
+dense1 = tf.keras.layers.Dense(embedding_dim, activation='relu')(bi_lstm)
+outputs = tf.keras.layers.Dense(n_labels, activation='softmax')(dense1)
+model = tf.keras.Model(inputs=inputs, outputs=outputs, name="fun_model")
+```
 ### Model Subclassing
 Model subclassing is harder to utilize than the Sequential or Functional. Actually, we don't need model subclassing in this problem. But this mothod has flexible for us to control every nuance of the network and training process. The template of the model subclassing can be represented as following:
 
