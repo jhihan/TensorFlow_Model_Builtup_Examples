@@ -69,15 +69,12 @@ class Model_sub(tf.keras.models.Model):
     """The bidirectional LSTM model builded up via subclassing
     """
     def __init__(self,max_length, vocab_size, embedding_dim, n_labels, embedding_matrix=None):
-        print("setting1")
         super(Model_sub, self).__init__()
         self.max_length = max_length
         if embedding_matrix is None:
-            print("None")
             self.embedding = tf.keras.layers.Embedding(input_dim=vocab_size, output_dim=embedding_dim,
                                                        input_length=max_length)
         else:
-            print("Not None")
             self.embedding = tf.keras.layers.Embedding(input_dim=vocab_size, output_dim=embedding_dim,
                                                        input_length=max_length,
                                                        embeddings_initializer=tf.keras.initializers.Constant(embedding_matrix),
